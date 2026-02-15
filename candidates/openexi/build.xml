@@ -50,7 +50,7 @@
 </target>
 
 <target name="compile" depends="prepare" if="libraryFound">
-  <javac srcdir="src" destdir="${build.dir}/classes" debug="${debug}" optimize="on">
+  <javac srcdir="src" destdir="${build.dir}/classes" debug="${debug}" optimize="on" encoding="windows-1252">
     <classpath refid="compile.class.path"/>
   </javac>
 </target>

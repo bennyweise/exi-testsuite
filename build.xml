@@ -97,6 +97,7 @@
 		-->
         <ant dir="candidates/exificient" target="${target}"/>
         <ant dir="candidates/openexi" target="${target}"/>
+        <ant dir="candidates/exirs" target="${target}"/>
         <!--
         <ant dir="candidates/xsbc" target="${target}"/>    
         <ant dir="candidates/esxml" target="${target}"/>
@@ -127,6 +128,13 @@
         <property name="config" value="config/property/compaction/compaction.xml config/testCases-restricted/all-v1.xml"/>
         <property name="japex.exi.ttfms.dataSourceSink.URI" value="network://localhost:9753"/>
 	<property name="validate.diff" value="false"/>
+        <property name="java.add_exports" value=""/>
+        <condition property="java.add_exports"
+            value="--add-exports java.xml/com.sun.org.apache.xerces.internal.xs=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.impl.dv.xs=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.impl.dv=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.impl.xs=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.parsers=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.util=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.xni=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.xni.grammars=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.xni.parser=ALL-UNNAMED">
+            <not>
+                <contains string="${java.version}" substring="1.8"/>
+            </not>
+        </condition>
 
         <!-- Print config file and URI being used -->
         <echo message="Using: "/>
@@ -135,8 +143,10 @@
         <echo message=" URI = ${japex.exi.ttfms.dataSourceSink.URI}"/>
         
         <java dir="." fork="true" classname="com.sun.japex.Japex">
+            <env key="JAVA_TOOL_OPTIONS" value="${java.add_exports}"/>
             <sysproperty key="java.library.path" path="${library.path}"/>
             <sysproperty key="japex.classPath" path="${framework.library.path}"/>
+            <jvmarg line="${java.add_exports}"/>
             <jvmarg value="-Djapex.home=${japex.home}"/>
             <jvmarg value="-Djapex.numberOfThreads=${japex.numberOfThreads}"/>
             <jvmarg value="-Djapex.resultUnit=${japex.resultUnit}"/>

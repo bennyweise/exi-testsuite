@@ -1419,8 +1419,8 @@ public class DecodingValidator implements XasExtUtil.TypedValueHelper {
 	 * @return a detected encoding name
 	 */
 	private String findInputEncoding(byte[] input) {
-		XMLInputSource source = new XMLInputSource("", "", "");
-		source.setByteStream(new ByteArrayInputStream(input));
+		XMLInputSource source = new XMLInputSource(
+				"", "", "", new ByteArrayInputStream(input), "UTF-8");
 		return findInputEncoding(source);
 	}
 

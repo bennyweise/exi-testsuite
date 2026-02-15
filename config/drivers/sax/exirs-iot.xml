@@ -1,0 +1,16 @@
+<driverGroup xmlns="http://www.sun.com/japex/testSuite"
+             xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <param name="japex.classPath" value="${japex.exi.ttfms.frameworkLibDir}/*.jar"/>
+  <param name="japex.classPath" value="${japex.exi.ttfms.candidatesDir}/exirs/dist/candidate-exirs.jar"/>
+  <param name="japex.classPath" value="${japex.exi.ttfms.candidatesDir}/exirs/lib/*.jar"/>
+
+  <param name="japex.driverClass" value="org.w3c.exi.ttf.candidate.exirs.ExiRsSAXDriver"/>
+  <param name="org.w3c.exi.ttf.driver.candidateName" value="ExiRS"/>
+  <param name="org.w3c.exi.ttf.candidate.exirs.cli" value="/Users/benny/Developer/exi-rs/target/debug/exi-rs"/>
+
+  <driver name="ExiRS">
+    <param name="description" value="exi-rs CLI decoding driver"/>
+  </driver>
+
+</driverGroup>

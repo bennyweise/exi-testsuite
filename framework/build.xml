@@ -9,6 +9,13 @@
     <property name="lib.unused.dir" value="lib/unused"/>
     <property name="japex.lib.dir" value="../japex/lib"/>
     <property name="jdsl.lib.dir" value="../japex/jdsl"/>
+    <property name="java.add_exports" value=""/>
+    <condition property="java.add_exports"
+        value="--add-exports java.xml/com.sun.org.apache.xerces.internal.xs=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.impl.dv.xs=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.impl.dv=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.impl.xs=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.parsers=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.util=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.xni=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.xni.grammars=ALL-UNNAMED --add-exports java.xml/com.sun.org.apache.xerces.internal.xni.parser=ALL-UNNAMED">
+        <not>
+            <contains string="${java.version}" substring="1.8"/>
+        </not>
+    </condition>
 
     <path id="compile.class.path">
         <fileset dir="${japex.lib.dir}" includes="*.jar"/>
@@ -32,7 +39,8 @@
 
     <target name="compile" depends="prepare">
         <javac srcdir="src" destdir="${build.dir}/classes"
-            debug="on" optimize="on" deprecation="on">
+            debug="on" optimize="on" deprecation="on" encoding="windows-1252">
+            <compilerarg line="${java.add_exports}"/>
             <classpath refid="compile.class.path"/>
         </javac>
     </target>

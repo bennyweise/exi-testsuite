@@ -14,6 +14,7 @@
     <param name="org.w3c.exi.ttf.dataSourceSink.URI" value="${japex.exi.ttfms.dataSourceSink.URI}"/>
 
     <param name="org.w3c.exi.ttf.recordDecodedEvents" value="no"/>
+    <param name="org.w3c.exi.ttf.schemaDeviations" value="true"/>
 
     <!-- initially set groupId to empty -->
     <param name="groupId" value=""/> 
